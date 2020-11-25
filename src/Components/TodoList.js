@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import Todo from './Todo'
-import TodoForm from './TodoForm.js'
+import React, {useState} from 'react';
+import Todo from './Todo';
+import { useForm } from "react-hook-form";
 
 function TodoList(){
     const [todos, setTodos] = useState([
@@ -17,6 +17,15 @@ function TodoList(){
             isCompleted: false 
         }
     ]);
+
+    const { register, handleSubmit, errors } = useForm();
+    
+    const onSubmit = (data, e) => {
+        console.log(data.todo);
+        if (!data) return;
+        addTodo(data.todo);
+        e.target.reset();
+    };
 
     const addTodo = text => {
         const newTodos = [...todos, { text }];
@@ -50,7 +59,16 @@ function TodoList(){
                     </Todo>
                 ))}
             </div>
-            <TodoForm addTodo={addTodo} />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                    type="text"
+                    name="todo"
+                    placeholder="Add todo"
+                    ref={register({required: "Please Enter a Todo!"})}
+                />
+                {errors.todo && <p>{errors.todo.message}</p>}
+                <input type="submit"/>
+            </form>
         </div>
     )
 }
