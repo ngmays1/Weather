@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Todo from './Todo';
 import { useForm } from "react-hook-form";
 
@@ -18,6 +18,20 @@ function TodoList(){
         }
     ]);
 
+    const [counter, setCounter] = useState(
+        {
+            count:0,
+            value:"Keep on working"
+        }
+    );
+
+    useEffect(() => {
+        if (counter.count > 3) {
+            setCounter(counter => ({ ...counter, value:"You've had a busy day!" }));
+        }
+        console.log(counter.value);
+    }, [counter.count])
+
     const { register, handleSubmit, errors } = useForm();
     
     const onSubmit = (data, e) => {
@@ -28,7 +42,8 @@ function TodoList(){
     };
 
     const addTodo = text => {
-        const newTodos = [...todos, { text }];
+        //append newtodo to list of todos
+        const newTodos = [...todos, { text:text, isCompleted:false }];
         setTodos(newTodos);
     };
 
@@ -38,16 +53,19 @@ function TodoList(){
         setTodos(newTodos);
     }
 
-    const removeTodo = index => {
+    const removeTodo = (index, count=counter.count) => {
         const newTodos = [...todos];
         newTodos.splice(index, 1);
         setTodos(newTodos);
+        setCounter(counter => ({ ...counter, count:count+1 }));
+        console.log(counter.count);
     }
 
 
     return (
         <div>
             <div className="todo-list">
+                <h1>{ counter.value }</h1>
                 {todos.map((todo, index) => (
                     <Todo 
                         key={index} 
