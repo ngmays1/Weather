@@ -61,7 +61,6 @@ function TodoList(){
         console.log(counter.count);
     }
 
-
     return (
         <div>
             <div className="todo-list">
