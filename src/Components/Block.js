@@ -1,7 +1,6 @@
 import React from 'react'
 
 function Block(block, index) {
-    console.log(block);
     let place = "";
     if(block.block === true){
         place = "O";

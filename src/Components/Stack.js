@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import Block from './Block'
 function Stack() {
 
@@ -13,17 +13,65 @@ function Stack() {
     );
 
     useEffect(() => {
-        getDirection();
-        move();
-    }, [stack.level]);
-
-    const getDirection = (direction=stack.direction) =>{
-        //if ((stack.position === 0 && direction) || ((stack.position === stack.level.length - stack.lives) && !stack.direction)){
-        if (stack.position === 4 && direction===true){
+        //getDirection()
+        setTimeout(() =>{
+        /*if (stack.position >= 4 && stack.direction===true){
             setStack(stack => ({...stack, direction:false }));
             console.log('direction switched to' + stack.direction);
         }
-        else if(stack.position === 0 && direction===false){
+        else if(stack.position <= 0 && stack.direction===false){
+            setStack(stack => ({...stack, direction:true }));
+            console.log('direction switched to' + stack.direction);
+        }
+        else{
+            console.log('no direction changed');
+        }*/
+    //}, 2000);
+        //move();
+        
+    //    setTimeout(() => {
+            const newLevel = stack.level;
+        if(stack.direction===true)
+            {
+                newLevel[stack.position]=false;
+                newLevel[stack.position +1]=true;
+                setStack(stack => ({...stack, position:stack.position+1, level:newLevel}));
+            }
+            else
+            {
+                newLevel[stack.position]=false;
+                newLevel[stack.position - 1]=true;
+                setStack(stack => ({...stack, position:stack.position-1, level:newLevel}));
+            }
+        }, 2000);
+        //console.log(stack);
+        console.log(stack.level);
+        //getDirection();
+        //await new Promise(r => setTimeout(r, 1000));
+        //await new Promise(r => setTimeout(r, 1000))
+    }, [stack.level]);
+
+    useEffect(() => {
+        if (stack.position >= 4 && stack.direction===true){
+            setStack(stack => ({...stack, direction:false }));
+            console.log('direction switched to' + stack.direction);
+        }
+        else if(stack.position <= 0 && stack.direction===false){
+            setStack(stack => ({...stack, direction:true }));
+            console.log('direction switched to' + stack.direction);
+        }
+        else{
+            console.log('no direction changed');
+        }
+    }, [stack.position, stack.direction]);
+
+    const getDirection = () =>{
+        //if ((stack.position === 0 && direction) || ((stack.position === stack.level.length - stack.lives) && !stack.direction)){
+        if (stack.position >= 4 && stack.direction===true){
+            setStack(stack => ({...stack, direction:false }));
+            console.log('direction switched to' + stack.direction);
+        }
+        else if(stack.position <= 0 && stack.direction===false){
             setStack(stack => ({...stack, direction:true }));
             console.log('direction switched to' + stack.direction);
         }

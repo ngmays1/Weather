@@ -30,7 +30,7 @@ function TodoList(){
             setCounter(counter => ({ ...counter, value:"You've had a busy day!" }));
         }
         console.log(counter.value);
-    }, [counter.count])
+    }, [counter.count, counter.value])
 
     const { register, handleSubmit, errors } = useForm();
     
