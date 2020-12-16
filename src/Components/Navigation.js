@@ -7,48 +7,41 @@ import {useSpring, animated} from 'react-spring';
 
 function Navigation() {
     const [showMenu, setShowMenu] = useState(false);
+    const links = [
+        {
+            name:"Home\n",
+            link:"/",
+            selected:true
+        },
+        {
+            name:"Stack\n",
+            link:"/stack",
+            selected:false
+        },
+        {
+            name:"HunterPedia\n",
+            link:"/hunter",
+            selected:false
+        },
+        {
+            name:"Rock-Paper-Scissors\n",
+            link:"/rock",
+            selected:false
+        }];
 
-    const props = useSpring({
-        opacity: 1,
-        from: { opacity: 0 },
-      });
-      
-    const fadeIn = useSpring({
-        //config: { ...config.stiff },
-        from: { opacity: 0 },
-        to: {
-          opacity: showMenu ? 1 : 0
-        }
-      });
+      const fade = useSpring({
+        opacity: showMenu ? 1 : 0});
 
-      const fadeOut = useSpring({
-        //config: { ...config.stiff },
-        from: { opacity: 1 },
-        to: {opacity:  0 }
-      });
 
     return (
         <div 
         className='menu'>
             <FontAwesomeIcon icon={faBars} onClick={() => {setShowMenu(!showMenu)}}/>
             <animated.div
-            style={showMenu ? fadeIn : fadeOut}>
-                {showMenu &&
-                <ul>
-                    <animated.li style={props}>
-                        <Link to="/">Home</Link>
-                    </animated.li>
-                    <li>
-                        <Link to="/stack">Stack</Link>
-                    </li>
-                    <li>
-                        <Link to="/hunter">HunterPedia</Link>
-                    </li>
-                    <li>
-                        <Link to="/rock">Rock-Paper-Scissors</Link>
-                    </li>
-                </ul>
-            }
+            style={fade}>
+                    {links.map((item, index) => (
+                            <Link to={item.link}>{item.name}</Link> 
+                    ))}
             </animated.div>
                
         </div>
