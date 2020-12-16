@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 
 function Hunter({ hunter, index }) {
-
+        
     return (
         <div>
             <Link to={{
@@ -15,5 +15,8 @@ function Hunter({ hunter, index }) {
         </div>
     )
 }
-
+//ten
+//zetsu
+//ren
+//hatsu
 export default Hunter

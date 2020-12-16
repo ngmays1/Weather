@@ -12,6 +12,12 @@ function Stack() {
         }
     );
 
+    const moveLevel = () => {
+        move();
+        return stack.level;
+    };
+    
+
     useEffect(() => {
         //getDirection()
         setTimeout(() =>{
@@ -49,7 +55,7 @@ function Stack() {
         //getDirection();
         //await new Promise(r => setTimeout(r, 1000));
         //await new Promise(r => setTimeout(r, 1000))
-    }, [stack.level]);
+    }, [stack.level, stack.direction, stack.position]);
 
     useEffect(() => {
         if (stack.position >= 4 && stack.direction===true){

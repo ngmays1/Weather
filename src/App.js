@@ -3,19 +3,22 @@ import TodoList from './Components/TodoList';
 import Pedia from './Components/Pedia';
 import Stack from './Components/Stack';
 import HunterView from './Views/HunterView';
+import Rock from './Components/Rock';
+import Navigation from './Components/Navigation';
 import './App.css';
 import {
-  Link,
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom';
-import HunterCard from './Views/HunterView';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBlind, faCode } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
 function App() {
-
+  library.add(faBlind, faCode);
   return (
     <div className="app">
       <Router>
@@ -34,9 +37,13 @@ function App() {
             <Route exact path="/hunter/">
               <Pedia/>
             </Route>
+            <Route paht="/rock">
+              <Rock/>
+            </Route>
           </Switch>
 
         </div>
+        <Navigation/>
 
       </Router>
     </div>

@@ -1,6 +1,5 @@
 import React, { useState }from 'react';
 import Hunter from './Hunter';
-import { Link } from 'react-router-dom';
 
 function Pedia() {
     const [hunters, setHunters] = useState([

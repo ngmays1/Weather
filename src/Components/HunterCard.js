@@ -1,8 +1,10 @@
 import React from 'react';
-import Hunter from './Hunter';
-import {Link} from 'react-router-dom';
+import {useSpring, animated} from 'react-spring';
+
 
 function HunterCard({ hunter }) {
+    const props = useSpring({
+    })
     return (
         <div>
             <h1>{ hunter.name }</h1>
