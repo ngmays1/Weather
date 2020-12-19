@@ -50,8 +50,38 @@
 
   .menu {
     position: fixed;
-    right: 5%;
-    top: 10%;
-    width: 8em;
+    display: flex;
+    flex-direction: column;
+    height: 12em;
+    width: 12em;
+    right: 2%;
+    top: 7%;
     margin-top: -2.5em;
+    }
+
+  .menu_box {
+    position: fixed;
+    right: 16%;
+    top: 5.5%;
+    width: 12em;
+    border-right: 2px solid black;
+  }
+
+  .slider_background {
+    background-color: white;
+    width:300px;
+    height:35px;
+    border: 2px solid black;
+    border-radius: 25px;
+    opacity: .5;
+  }
+
+  .center_white {
+    text-align: center;
+    color: white;
+    position:relative;
+  }
+
+  .menulinks {
+    white-space: pre-wrap;
   }

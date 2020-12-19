@@ -7,40 +7,56 @@ import {useSpring, animated} from 'react-spring';
 
 function Navigation() {
     const [showMenu, setShowMenu] = useState(false);
-    const links = [
+    const sitelinks = [
         {
-            name:"Home\n",
+            name:"Home",
             link:"/",
             selected:true
         },
         {
-            name:"Stack\n",
+            name:"Stack",
             link:"/stack",
             selected:false
         },
         {
-            name:"HunterPedia\n",
+            name:"HunterPedia",
             link:"/hunter",
             selected:false
         },
         {
-            name:"Rock-Paper-Scissors\n",
+            name:"Rock-Paper-Scissors",
             link:"/rock",
             selected:false
         }];
 
-      const fade = useSpring({
-        opacity: showMenu ? 1 : 0});
+    const [links, setLinks] = useState(sitelinks);
 
+      const fade = useSpring({
+        opacity: showMenu ? 1 : 0
+    });
+
+    const setNav = (selected) => {
+        sitelinks.forEach((item, index) =>  {
+            if(index === selected){
+                item.selected=true;
+            }
+            else{
+                item.selected=false;
+            }
+        });
+        setLinks(sitelinks);
+        setShowMenu(false);
+    }
 
     return (
-        <div 
+        <div
         className='menu'>
             <FontAwesomeIcon icon={faBars} onClick={() => {setShowMenu(!showMenu)}}/>
             <animated.div
             style={fade}>
-                    {links.map((item, index) => (
-                            <Link to={item.link}>{item.name}</Link> 
+                {showMenu &&
+                    links.map((item, index) => ((!item.selected) &&
+                            <Link className='menulinks' key={index} index={index} to={item.link} onClick={() => {setNav(index)}}>{item.name}{'\n'}</Link>
                     ))}
             </animated.div>
                
