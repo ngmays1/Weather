@@ -1,5 +1,5 @@
 import React, { useState }from 'react';
-import Hunter from './Hunter';
+import {Link} from 'react-router-dom';
 
 function Pedia() {
     const [hunters, setHunters] = useState([
@@ -8,14 +8,14 @@ function Pedia() {
             ability:"Rock",
             type:"Enhancer",
             health:100,
-            nen:50
+            nen:200
         },
         {
             name:"Kurapika",
             ability:"Chains",
             type:"Conjurer",
             health:100,
-            nen:70
+            nen:300
         }
     ]);
 /*
@@ -27,28 +27,33 @@ function Pedia() {
         console.log(newHunters);
         setHunters(newHunters);
     }
-*/
+
+    const getName = (index) => {
+        console.log(hunters[index].name);
+    }
     const addHunter = hunter =>{
         let newHunters = [...hunters];
         newHunters = [...hunters, hunter];
         setHunters(newHunters);
     }
+
+   */ 
     return (
         <div>
             <div>
                 <h1>HunterPedia:</h1>
                 {hunters.map((hunter, index) => (
                     
-                    <Hunter
-                        key={index}
-                        index={index}
-                        hunter={hunter}
+                    <div
+                    key={index}>
+                    <Link to={{
+                        pathname:`/hunter/${index, hunter.name}`,
+                        state:{ hunter }}}
                     >
-                    </Hunter>
-                
-
+                        <h2> { hunter.name } </h2>
+                    </Link>
+                    </div>
                 ))}
-
             </div>
         </div>
     )
