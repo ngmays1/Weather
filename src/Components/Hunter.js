@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 
 function Hunter({ hunter, index }) {
         
+
+
     return (
         <div>
             <Link to={{

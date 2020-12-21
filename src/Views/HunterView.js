@@ -1,26 +1,27 @@
 import React from 'react'
 import { useHistory, useLocation, useParams } from 'react-router-dom';
-import HunterCard from '../Components/HunterCard';
+import HunterCard2 from '../Components/HunterCard2';
 
 function HunterView() {
 
-    const { index } = useParams();
+    const { index, naame } = useParams();
     console.log(index);
     let location = useLocation();
     console.log(location.state.hunter);
 
     let history = useHistory();
     
-    function handleClick(){
+    function goback(){
+        console.log(location.state);
         history.push("/hunter");
     }
 
     return (
         <div>
-            <HunterCard
+            <HunterCard2
                 hunter={ location.state.hunter }>
-            </HunterCard>
-            <button type="button" onClick={handleClick}>
+            </HunterCard2>
+            <button type="button" onClick={goback}>
                 Back
             </button>
         </div>

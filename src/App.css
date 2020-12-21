@@ -11,6 +11,11 @@
     padding: 5px;
   }
   
+  .todo-block {
+    position:relative;
+    display: flex;
+    flex-direction: row;
+  }
   .todo {
     align-items: center;
     background: #fff;
@@ -29,6 +34,12 @@
     height: 33px;
     padding: .5pc;
   
+  }
+
+  .todo-buttons {
+    padding: .5pc;
+
+    
   }
   
   .block-border {
@@ -73,15 +84,28 @@
     height:35px;
     border: 2px solid black;
     border-radius: 25px;
-    opacity: .5;
+    position:relative;
+    opacity: .75;
   }
 
   .center_white {
     text-align: center;
     color: white;
-    position:relative;
-  }
+    }
 
   .menulinks {
+    color: blue;
     white-space: pre-wrap;
+  }
+
+  #inner_bar {
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .card {
+    background-color: violet;
+    width: 20em;
+    opacity: .75;
   }

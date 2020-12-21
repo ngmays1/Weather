@@ -5,6 +5,8 @@ import Stack from './Components/Stack';
 import HunterView from './Views/HunterView';
 import Rock from './Components/Rock';
 import Navigation from './Components/Navigation';
+import Nav from './Components/Nav';
+import Calc from './Components/Calc';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -37,14 +39,16 @@ function App() {
             <Route exact path="/hunter/">
               <Pedia/>
             </Route>
-            <Route paht="/rock">
+            <Route path="/rock">
               <Rock/>
+            </Route>
+            <Route path="/calc">
+              <Calc/>
             </Route>
           </Switch>
 
         </div>
-        <Navigation/>
-
+        <Nav/>
       </Router>
     </div>
   );
