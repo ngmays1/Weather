@@ -3,6 +3,7 @@ import TodoList from './Components/TodoList';
 import Pedia from './Components/Pedia';
 import Stack from './Components/Stack';
 import HunterView from './Views/HunterView';
+import BattleView from './Views/BattleView';
 import Rock from './Components/Rock';
 import Navigation from './Components/Navigation';
 import Nav from './Components/Nav';
@@ -24,7 +25,6 @@ function App() {
   return (
     <div className="app">
       <Router>
-
         <div>
           <Switch>
             <Route exact path="/">
@@ -44,6 +44,9 @@ function App() {
             </Route>
             <Route path="/calc">
               <Calc/>
+            </Route>
+            <Route path='/battle'>
+              <BattleView/>
             </Route>
           </Switch>
 

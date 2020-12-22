@@ -1,6 +1,7 @@
 import React, { useState }from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import { useSpring, animated } from 'react-spring';
+import { useForm } from 'react-hook-form';
 
 function Pedia() {
     const [hunters, setHunters] = useState([
@@ -47,13 +48,33 @@ function Pedia() {
 
    */ 
 
+   const {register, handleSubmit, errors } = useForm();
+
+   const onSubmit = (data, e) => {
+       if (data.hunter.length === 0) return;
+       const hunters = data.hunter;
+       console.log(hunters);
+       e.target.reset();
+       //possibly cannot call redirect outside of render
+       return <Redirect to={{
+           pathname:'/battle',
+           state: { hunters }}} />    
+   }
+
    const sendHunter = hunter => {
        console.log(hunter);
+   }
+
+   const toStack = () => {
+       console.log('prereturn'); 
+       return <Link to={{ pathname:'/rock'}}/>
+
    }
     return (
         <div>
             <div>
                 <h1>HunterPedia:</h1>
+                <form onSubmit={handleSubmit(onSubmit)}>
                 {hunters.map((hunter, index) => (  
                     <animated.div
                     key={index}
@@ -64,12 +85,19 @@ function Pedia() {
                     >
                         <h2> { hunter.name } </h2>
                     </Link>
-                    <input type='checkbox' name='hunter' value={sendHunter(hunter)}></input>
-
+                    <input 
+                        className='chks' 
+                        type='checkbox' 
+                        name='hunter' 
+                        value={JSON.stringify(hunter)}
+                        ref={register}
+                        />
                     </animated.div>
                 ))}
-                <button type='submit'></button>
+                <input type='submit' name='battle' type='submit'/>
+                </form>
             </div>
+            <button type='button' onClick={toStack} >Rockkkkkk</button>
         </div>
     )
 }

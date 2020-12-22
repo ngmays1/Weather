@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory, useLocation, useParams } from 'react-router-dom';
-import HunterCard2 from '../Components/HunterCard2';
+import HunterCard from '../Components/HunterCard';
 
 function HunterView() {
 
@@ -18,9 +18,9 @@ function HunterView() {
 
     return (
         <div>
-            <HunterCard2
+            <HunterCard
                 hunter={ location.state.hunter }>
-            </HunterCard2>
+            </HunterCard>
             <button type="button" onClick={goback}>
                 Back
             </button>
