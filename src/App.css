@@ -22,3 +22,41 @@
     margin-bottom: 6px;
     padding: 3px 10px;
   }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    width:auto;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .choice {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .rock {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .user {
+    position: relative;
+    right: 25%;
+  }
+
+  .enemy {
+    position: relative;
+    left: 25%;
+  }
+
+  .row2 {
+    display: flex;
+    flex-direction: column;
+    width:auto;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }

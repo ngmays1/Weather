@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Todo from './Todo';
 import { useForm } from "react-hook-form";
+import Rock from './Rock';
 
 function TodoList(){
     const [todos, setTodos] = useState([
         { 
-            text: "Learn react",
+            text: "Learn React",
             isCompleted: false 
         },
         { 
-            text: "Build profile",
+            text: "Win Rock, Paper, Scissors",
             isCompleted: false 
         },
         { 
-            text: "make money",
+            text: "Create Fun Projects!",
             isCompleted: false 
         }
     ]);
@@ -24,6 +25,8 @@ function TodoList(){
             value:"Keep on working"
         }
     );
+
+    const [showGame, setShowGame] = useState(false);
 
     useEffect(() => {
         if (counter.count > 3) {
@@ -49,7 +52,7 @@ function TodoList(){
 
     const completeTodo = index => {
         const newTodos = [...todos];
-        newTodos[index].isCompleted = true;
+        newTodos[index].isCompleted = !newTodos[index].isCompleted;
         setTodos(newTodos);
     }
 
@@ -59,6 +62,23 @@ function TodoList(){
         setTodos(newTodos);
         setCounter(counter => ({ ...counter, count:count+1 }));
         console.log(counter.count);
+    }
+
+    const completeGame = () => {
+        let index = '';
+        todos.forEach((todo, i) => {
+            if (todo.text === 'Win Rock, Paper, Scissors') {
+                index = i;
+            }
+        });
+        try {
+        completeTodo(index);
+        setTimeout(() => {
+            removeTodo(index);
+        }, 2000);
+    } catch (error) {
+        console.log(error);
+    }
     }
 
     return (
@@ -86,6 +106,12 @@ function TodoList(){
                 {errors.todo && <p>{errors.todo.message}</p>}
                 <input type="submit"/>
             </form>
+            <button onClick={() => setShowGame(!showGame)}>{showGame ? 'Hide ' : 'Show '} Game</button>
+            {showGame &&
+            <Rock
+                complete={completeGame}
+            />
+            }
         </div>
     )
 }
