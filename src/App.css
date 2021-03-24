@@ -1,62 +1,51 @@
-.app {
-    background: #209cee;
-    height: 100vh;
-    padding: 30px;
-  }
-  
-  .todo-list {
-    background: #e8e8e8;
-    border-radius: 4px;
-    max-width: 400px;
-    padding: 5px;
-  }
-  
-  .todo {
-    align-items: center;
-    background: #fff;
-    border-radius: 3px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
-    display: flex;
-    font-size: 12px;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    padding: 3px 10px;
-  }
+.App {
+  text-align: center;
+  background-color: lightgray;
+  width:100%;
+  min-height: 720px;
+}
 
-  .row {
-    display: flex;
-    flex-direction: row;
-    width:auto;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
 
-  .choice {
-    margin-left: 50px;
-    margin-right: 50px;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
   }
+}
 
-  .rock {
-    display: flex;
-    justify-content: space-around;
-  }
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
 
-  .user {
-    position: relative;
-    right: 25%;
-  }
+.App-link {
+  color: #61dafb;
+}
 
-  .enemy {
-    position: relative;
-    left: 25%;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-  .row2 {
-    display: flex;
-    flex-direction: column;
-    width:auto;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
+.center_row {
+  display: flex;
+  color: #61dafb;
+  flex-direction: row;
+}
+
+.row_item {
+  padding: 10px;
+}

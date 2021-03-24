@@ -1,14 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import WeatherCard from './WeatherCard';
 import { Navbar, Dropdown, DropdownButton, Button, Container, Form, InputGroup, Row, Col, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useSpring, config, animated } from 'react-spring';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 function Weather() {
     const { register, handleSubmit, errors } = useForm();
     const [nodes, setNodes] = useState([]);
     const [tempType, setTempType] = useState('K');
+
+    useEffect(() => {
+        console.log(nodes)
+    }, [nodes])
 
     const removeNode = (index) => {
         const newNodes = [...nodes];
@@ -23,33 +29,12 @@ function Weather() {
         config: config.slow
     });
 
-    const getWeather = (lat, lon, city) => {
-        let match = false;
-        nodes.forEach(node => { if (node.city === city) { match=true}});
-        if (match === true) { return };
-        const exclude_parts = 'minutely,alerts';
-        const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude_parts}&appid=b0298b7bf6f1829b60d400d5964f1577`;
-        fetch(url).then(response => response.json())
-        .then(data => {
-            console.log(data);
-            const newNodes = [...nodes, { data:data, city:city, visible:false }];
-            setNodes(newNodes);
-            console.log(nodes)
-            return (nodes);
-        })
-    } 
-
     const getWeather2 = (days) => {
         let match = false;
         //for (var i = 0; i < nodes.length; i++){ if(nodes[i].city === days[i])}
         nodes.forEach(node => { if (node.days.city_name === days.city_name) { match=true}});
         if (match === true) { return };
-        console.log('gotw2');
         const newNodes = [...nodes, { days }]
-        console.log(days);
-        //console.log(days.lon);
-        //console.log(days.city_name);
-        console.log(newNodes);
         setNodes(newNodes);
         return (nodes);
     }
@@ -65,12 +50,7 @@ function Weather() {
     }
 
     const onSubmit = (data) => {
-        //const zip = data.zip;
-        const country = 'US';
         console.log(data);
-        //let proxy = 'https://cors-anywhere.herokuapp.com/';
-        //let zipURL = `https://thezipcodes.com/api/v1/search?zipCode=${data.zip}&countryCode=US&apiKey=66c226ba3fe4c8478980cc65133d3c22`;
-        //fetch(proxy + zipURL)
         const key = '1f153d85308b440292f952df7be43f1e'
         let zipUrl = `https://api.weatherbit.io/v2.0/current?postal_code=${data.zip}&key=${key}`;
         let forecast = `https://api.weatherbit.io/v2.0/forecast/daily?postal_code=${data.zip}&key=${key}`;
@@ -78,13 +58,8 @@ function Weather() {
         fetch(forecast)
         .then(response => response.json())
         .then(data => {
-            const params = data.location;
-            console.log(data.data);
-            console.log(data);
-            //console.log(params);
             console.log('sending lon/lat to getweather');
             return getWeather2(data);
-            //return getWeather(params.latitude, params.longitude, params.city);
         })
         .catch(e => {
             console.log(e);
@@ -96,7 +71,7 @@ function Weather() {
     <Container>
         <animated.div style={flyIn}>
             <Navbar className='justify-content-center'>
-                <ToggleButtonGroup  className='ml-3 corner-caret' name='tempgroup' type="radio">
+                <ToggleButtonGroup  className='' name='tempgroup' type="radio">
                             <ToggleButton className='m-1' variant='secondary' name='K' value='K' onChange={() => setTempType('K')}>K°</ToggleButton>
                             <ToggleButton className='m-1' variant='secondary' name='F' value='F' onChange={() => setTempType('F')}>F°</ToggleButton>
                             <ToggleButton className='m-1' variant='secondary' name='C' value='C ' onChange={() => setTempType('C')}>C°</ToggleButton>
@@ -117,17 +92,14 @@ function Weather() {
             </Navbar>
         </animated.div>
 
+        <Col>       
+            {errors.zip && <p>{errors.zip.message}</p>}
+        </Col>
 
-        <Col>                    {errors.zip && <p>{errors.zip.message}</p>}
-</Col>
-
-        <Form className='justify-content-md-center'>
-                <Row>
-                </Row>
-            </Form>
-            {//nodes.length >=1 &&
+            {
                 nodes.map((node, index) => (
-                    <div key={index}>
+                    <Container key={index}>
+
                     <WeatherCard
                         weather={node}
                         removeNode={removeNode}
@@ -135,7 +107,7 @@ function Weather() {
                         getTemp={getTemp}
                         tempType={tempType}
                         />
-                        </div>
+                        </Container>
                 )) }
     </Container>
     )}
